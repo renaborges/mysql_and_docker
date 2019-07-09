@@ -1,0 +1,28 @@
+#!/bin/bash
+
+version=$1
+
+sudo docker pull centos/mysql-${version}-centos7
+
+if [ $? -eq 0 ];then
+   echo "mysql version exists"
+else
+   echo "mysql version doesn't exist"
+exit 1
+fi
+
+
+echo "start mysql"
+container=$(sudo docker run --name mysqltest-${version} -e MYSQL_ROOT_PASSWORD=mysql -d centos/mysql-${version}-centos7)
+
+if [ -z $container ];then
+    echo "variable is empty container can't start"
+    exit 2
+else
+    echo "start mysql prompt, retrieve the version and get into the db"
+    sudo docker exec -it mysqltest-${version} bash -c "mysql --version; sleep 60; mysql"
+    #sudo docker exec -it mysqltest-${version} bash 
+fi
+
+sudo docker stop mysqltest-${version}
+sudo docker rm mysqltest-${version}
