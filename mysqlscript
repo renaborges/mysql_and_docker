@@ -2,8 +2,11 @@
 
 version=$1
 
+#Insert version of mysql here when running the script, for example 57
+#It pulls and download an image of centos with mysql
 sudo docker pull centos/mysql-${version}-centos7
 
+#If an argument (version) is not given, exit
 if [ $? -eq 0 ];then
    echo "mysql version exists"
 else
