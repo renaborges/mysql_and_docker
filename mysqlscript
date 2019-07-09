@@ -2,7 +2,7 @@
 
 version=$1
 
-#Insert version of mysql here when running the script, for example 57
+#Insert version (Arg) of mysql here when running the script, for example 57
 #It pulls and download an image of centos with mysql
 sudo docker pull centos/mysql-${version}-centos7
 
